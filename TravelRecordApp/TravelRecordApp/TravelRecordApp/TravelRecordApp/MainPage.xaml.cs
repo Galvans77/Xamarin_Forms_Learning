@@ -23,6 +23,10 @@ namespace TravelRecordApp
             {
                 Navigation.PushAsync(new HomePage());
             }
+            else
+            {
+                DisplayAlert("Error", "Please write Email and Password", "Ok");
+            }
 
         }
     }

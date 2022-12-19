@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using System.IO;
 
 namespace TravelRecordApp.Droid
 {
@@ -16,8 +17,18 @@ namespace TravelRecordApp.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+
+            LoadApplication(new App(GetDbPath()));
         }
+
+        private static string GetDbPath()
+        {
+            var dbName = "travel_deb.sqlite";
+            var folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            return Path.Combine(folderPath, dbName);
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
